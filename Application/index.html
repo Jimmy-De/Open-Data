@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="http://code.jquery.com/ui/1.9.0/themes/cupertino/jquery-ui.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <script src="./jquery-csv-master/jquery-csv-master/src/jquery.csv.js"></script>
+</head>
+
+<body>
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-2">Bienvenue à LA</a></li>
+            <li><a href="#tabs-1">Les données</a></li>
+        </ul>
+
+        <div id="tabs-1">
+
+        </div>
+
+        <div id="tabs-2">
+            <div class="form-group" style="width:20%;">
+                Ville :<input type="text" class="form-control" value="NANTES">
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">Hotels
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">Campings
+                </label>
+            </div>
+            <div class="form-check-inline ">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" >Patrimoine
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="" >Activités
+                </label>
+            </div>
+            <div id="googleMap" style="width:80%;height:740px;"></div>
+
+
+
+
+            <script>
+                function myMap() {
+                    var nantes = new google.maps.LatLng(47.218371, -1.553621)
+                    var googleMap = {
+                        center: nantes,
+                        zoom: 11.5,
+                        styles: [{
+                            "featureType": "poi",
+                            "stylers": [{
+                                "visibility": "off"
+                            }]
+                        }]
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"), googleMap);
+                    ////////////////////////
+                    // Fin initialisation //
+                    ////////////////////////
+
+                    ////////// Camping Nantes //////////////
+                    var campingNantes = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2432745, -1.5567568),
+                        map: map,
+                        title: "Camping de Nantes",
+                        icon: "./tente.png"
+                    });
+
+                    var htmlContent = '<div class="info-window-container">';
+                    htmlContent += ' <h2>CAMPING NANTES</h2>';
+                    htmlContent += ' <p><b>Catégorie :</b> 5 étoiles</p>';
+                    htmlContent += ' <p><b>Equipement :</b> Piscine couverte,WiFi</p>';
+                    htmlContent += ' <p><b>Tarif :</b> Non communiqué </p>';
+                    htmlContent += ' <p><b>Site : </b><a href="http://reservation.nantes-tourisme.com/fr/hebergements/a161179/HPAPDL044161179/reserver" target="_blank"> Lien vers le camping</a></p>';
+                    htmlContent += '</div>';
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: htmlContent
+                    });
+
+                    campingNantes.addListener('click', function() {
+                        infoWindow.open(googleMap, campingNantes);
+                    });
+
+                    ////////// Camping Ste Luce //////////////
+                    var campingSteLuce = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2516506, -1.4537793),
+                        map: map,
+                        title: "Camping de Sainte Luce",
+                        icon: "./tente.png"
+                    });
+
+                    var htmlContent1 = '<div class="info-window-container">';
+                    htmlContent1 += ' <h2>CAMPING BELLE RIVIÈRE</h2>';
+                    htmlContent1 += ' <p><b>Catégorie :</b> 3 étoiles</p>';
+                    htmlContent1 += ' <p><b>Equipement :</b> WiFi</p>';
+                    htmlContent1 += ' <p><b>Tarif :</b> Non communiqué </p>';
+                    htmlContent1 += ' <p><b>Site : </b><a href="http://www.camping-belleriviere.com/" target="_blank"> Lien vers le camping</a></p>';
+                    htmlContent1 += '</div>';
+                    var infoWindow1 = new google.maps.InfoWindow({
+                        content: htmlContent1
+                    });
+
+                    campingSteLuce.addListener('click', function() {
+                        infoWindow1.open(googleMap, campingSteLuce);
+                    });
+
+                    //////////////CATHÉDRALE SAINT-PIERRE//////////////
+                    var cathStPierre = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2183531, -1.5504798),
+                        map: map,
+                        title: "Cathédrale Saint Pierre",
+                        icon: "./patrimoine.png"
+                    });
+
+                    var htmlContent2 = '<div class="info-window-container">';
+                    htmlContent2 += ' <h2>CATHÉDRALE SAINT-PIERRE</h2>';
+                    htmlContent2 += ' <p><b>Style :</b> Médiéval</p>';
+                    htmlContent2 += ' <p><b>Tarif :</b> Gratuit </p>';
+                    htmlContent2 += ' <p><b>Site : </b><a href="http://www.nantes-tourisme.com/" target="_blank"> Lien vers le patrimoine culturel</a></p>';
+                    htmlContent2 += '</div>';
+                    var infoWindow2 = new google.maps.InfoWindow({
+                        content: htmlContent2
+                    });
+
+                    cathStPierre.addListener('click', function() {
+                        infoWindow2.open(googleMap, cathStPierre);
+                    });
+
+                    //////////////PARC FLORAL DE LA BEAUJOIRE//////////////
+                    var parcBj = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2624561, -1.5320777),
+                        map: map,
+                        title: "Parc floral de la Beaujoire",
+                        icon: "./patrimoine.png"
+                    });
+
+                    var htmlContent3 = '<div class="info-window-container">';
+                    htmlContent3 += ' <h2>PARC FLORAL DE LA BEAUJOIRE</h2>';
+                    htmlContent3 += ' <p><b>Style :</b> Contemporain</p>';
+                    htmlContent3 += ' <p><b>Tarif :</b> Gratuit </p>';
+                    htmlContent3 += ' <p><b>Site : </b><a href="http://www.nantes-tourisme.com/" target="_blank"> Lien vers le patrimoine culturel</a></p>';
+                    htmlContent3 += '</div>';
+                    var infoWindow3 = new google.maps.InfoWindow({
+                        content: htmlContent3
+                    });
+
+                    parcBj.addListener('click', function() {
+                        infoWindow3.open(googleMap, parcBj);
+                    });
+
+
+                    ////////// OKKO HOTEL NANTES CHÂTEAU //////////////
+                    var okkohotel = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.21666, -1.55178),
+                        map: map,
+                        title: "OKKO HOTEL NANTES CHATEAU",
+                        icon: "./hotel.png"
+                    });
+
+                    var htmlContent4 = '<div class="info-window-container">';
+                    htmlContent4 += ' <h2>OKKO HOTEL NANTES CHÂTEAU</h2>';
+                    htmlContent4 += ' <p><b>Catégorie :</b> 4 étoiles</p>';
+                    htmlContent4 += ' <p><b>Equipement :</b> Espace bien-être, Parking privé</p>';
+                    htmlContent4 += ' <p><b>Tarif :</b> Non communiqué </p>';
+                    htmlContent4 += ' <p><b>Site : </b><a href="http://nanteschateau.okkohotels.com/" target="_blank"> Lien vers l\'hotel</a></p>';
+                    htmlContent4 += '</div>';
+                    var infoWindow4 = new google.maps.InfoWindow({
+                        content: htmlContent4
+                    });
+
+                    okkohotel.addListener('click', function() {
+                        infoWindow4.open(googleMap, okkohotel);
+                    });
+
+                    ////////// 	BHÔ HOTELS //////////////
+                    var bhohotel = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2223488, -1.6263328),
+                        map: map,
+                        title: "BHÔ HOTELS",
+                        icon: "./hotel.png"
+                    });
+
+                    var htmlContent5 = '<div class="info-window-container">';
+                    htmlContent5 += ' <h2>BHÔ HOTELS</h2>';
+                    htmlContent5 += ' <p><b>Catégorie :</b> 3 étoiles</p>';
+                    htmlContent5 += ' <p><b>Equipement :</b> Parking privé, Salle de sport, WiFi</p>';
+                    htmlContent5 += ' <p><b>Tarif :</b> Non communiqué </p>';
+                    htmlContent5 += ' <p><b>Site : </b><a href="http://reservation.nantes-tourisme.com" target="_blank"> Lien vers l\'hotel</a></p>';
+                    htmlContent5 += '</div>';
+                    var infoWindow5 = new google.maps.InfoWindow({
+                        content: htmlContent5
+                    });
+
+                    bhohotel.addListener('click', function() {
+                        infoWindow5.open(googleMap, bhohotel);
+                    });
+
+                    ////////// 	CIEL DE LOIRE //////////////
+                    var cieldeloire = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.177153, -1.5208953),
+                        map: map,
+                        title: "CIEL DE LOIRE",
+                        icon: "./activité.png"
+                    });
+
+                    var htmlContent6 = '<div class="info-window-container">';
+                    htmlContent6 += ' <h2>CIEL DE LOIRE</h2>';
+                    htmlContent6 += ' <p><b>Activités :</b> Montgolfière</p>';
+                    htmlContent6 += ' <p><b>Tarif :</b> Non communiqué </p>';
+                    htmlContent6 += ' <p><b>Site : </b><a href="http://www.cieldeloire.com" target="_blank"> Lien vers l\'activité</a></p>';
+                    htmlContent6 += '</div>';
+                    var infoWindow6 = new google.maps.InfoWindow({
+                        content: htmlContent6
+                    });
+
+                    cieldeloire.addListener('click', function() {
+                        infoWindow6.open(googleMap, cieldeloire);
+                    });
+
+
+                    ////////// 	ACROCIME CARQUEFOU //////////////
+                    var acrocime = new google.maps.Marker({
+                        position: new google.maps.LatLng(47.2963306, -1.4619546),
+                        map: map,
+                        title: "ACROCIME CARQUEFOU",
+                        icon: "./activité.png"
+                    });
+
+                    var htmlContent7 = '<div class="info-window-container">';
+                    htmlContent7 += ' <h2>ACROCIME CARQUEFOU</h2>';
+                    htmlContent7 += ' <p><b>Activités :</b> Parcours dans les arbres</p>';
+                    htmlContent7 += ' <p><b>Tarif :</b> Tarif indiv. réduit, Tarif étudiant </p>';
+                    htmlContent7 += ' <p><b>Site : </b><a href="http://www.acrocime.com/" target="_blank"> Lien vers l\'activité</a></p>';
+                    htmlContent7 += '</div>';
+                    var infoWindow7 = new google.maps.InfoWindow({
+                        content: htmlContent7
+                    });
+
+                    acrocime.addListener('click', function() {
+                        infoWindow7.open(googleMap, acrocime);
+                    });
+
+
+                }
+            </script>
+
+
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=YOURKEY&callback=myMap"></script>
+            <!-- -->
+            <script>
+                $(function() {
+                    $("#tabs").tabs();
+                });
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
